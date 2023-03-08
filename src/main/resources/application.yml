@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/antd_pro
+    username: root
+    password: root
+  redis:
+    host: 8.130.33.99
+    port: 6379
+  jackson:
+    date-format: yyyy-MM-dd
