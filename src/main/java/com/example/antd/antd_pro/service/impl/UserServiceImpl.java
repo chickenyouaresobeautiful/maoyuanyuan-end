@@ -1,19 +1,24 @@
 package com.example.antd.antd_pro.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.antd.antd_pro.constant.ErrorEnum;
 import com.example.antd.antd_pro.constant.TokenConstant;
+import com.example.antd.antd_pro.constant.UserConstant;
 import com.example.antd.antd_pro.entity.UserEntity;
 import com.example.antd.antd_pro.service.UserService;
 import com.example.antd.antd_pro.mapper.UserMapper;
 import com.example.antd.antd_pro.utils.JwtUtils;
+import com.example.antd.antd_pro.vo.UserAddVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -102,6 +107,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
             user.setStatus(0);
         }
         this.updateById(user);
+    }
+
+    @Override
+    public void addUser(UserAddVo userAddVo) {
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(userAddVo, userEntity);
+        userEntity.setStatus(0);
+        userEntity.setRegisterTime(DateUtil.date());
+        if (userAddVo.getAvatar().size() > 0) {
+            userEntity.setAvatar(userAddVo.getAvatar().get(0).getResponse().getImageUrl());
+        } else {
+            userEntity.setAvatar(UserConstant.DEFAULT_IMG);
+        }
+        this.save(userEntity);
+    }
+
+    @Override
+    public void updateUser(String uid, UserAddVo userAddVo) {
+        UserEntity userEntity = this.getById(uid);
+        BeanUtils.copyProperties(userAddVo, userEntity);
+        if (userAddVo.getAvatar().size() > 0) {
+            userEntity.setAvatar(userAddVo.getAvatar().get(0).getResponse().getImageUrl());
+        }
+        this.updateById(userEntity);
     }
 }
 

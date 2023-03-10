@@ -12,7 +12,6 @@
         <result property="address" column="address" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="TINYINT"/>
-        <result property="role" column="role" jdbcType="VARCHAR"/>
         <result property="registerTime" column="register_time" jdbcType="TIMESTAMP"/>
         <result property="registerIp" column="register_ip" jdbcType="VARCHAR"/>
         <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
@@ -23,7 +22,7 @@
         id
         ,username,password,
         realname,address,phone,
-        status,role,register_time,
+        status,register_time,
         register_ip,avatar,email
     </sql>
 </mapper>

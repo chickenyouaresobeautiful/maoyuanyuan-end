@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.antd.antd_pro.mapper.GoodsMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.antd.antd_pro.entity.GoodsEntity">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="stock" column="stock" jdbcType="INTEGER"/>
+            <result property="sales" column="sales" jdbcType="INTEGER"/>
+            <result property="cover" column="cover" jdbcType="VARCHAR"/>
+            <result property="pics" column="pics" jdbcType="VARCHAR"/>
+            <result property="isOn" column="is_on" jdbcType="INTEGER"/>
+            <result property="isRecommend" column="is_recommend" jdbcType="INTEGER"/>
+            <result property="details" column="details" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,category_id,
+        title,description,price,
+        stock,sales,cover,
+        pics,is_on,is_recommend,
+        details,create_time,update_time
+    </sql>
+</mapper>

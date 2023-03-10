@@ -52,11 +52,6 @@ public class UserEntity implements Serializable {
     private Integer status;
 
     /**
-     * 角色
-     */
-    private String role;
-
-    /**
      * 注册时间
      */
     private Date registerTime;

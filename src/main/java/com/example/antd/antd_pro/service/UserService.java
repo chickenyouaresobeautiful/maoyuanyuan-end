@@ -3,6 +3,7 @@ package com.example.antd.antd_pro.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.antd.antd_pro.entity.UserEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.antd.antd_pro.vo.UserAddVo;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +26,8 @@ public interface UserService extends IService<UserEntity> {
     Page<UserEntity> getUserList(Map<String, Object> params);
 
     void updateStatus(String uid);
+
+    void addUser(UserAddVo userAddVo);
+
+    void updateUser(String uid, UserAddVo userAddVo);
 }

@@ -5,6 +5,7 @@ import com.example.antd.antd_pro.constant.ErrorEnum;
 import com.example.antd.antd_pro.entity.UserEntity;
 import com.example.antd.antd_pro.service.UserService;
 import com.example.antd.antd_pro.utils.R;
+import com.example.antd.antd_pro.vo.UserAddVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.util.StringUtils;
@@ -27,12 +28,6 @@ public class UserController {
         return R.ok().put("userPage", userPage);
     }
 
-    @PostMapping("add")
-    public R add(@RequestBody UserEntity userEntity) {
-        userService.save(userEntity);
-        return R.ok();
-    }
-
     @PostMapping("login")
     public R login(@RequestBody UserEntity userEntity) {
         String message = userService.login(userEntity);
@@ -42,7 +37,7 @@ public class UserController {
             return R.error(ErrorEnum.WRONG_USER_NAME_OR_PASSWORD.getCode(), ErrorEnum.WRONG_USER_NAME_OR_PASSWORD.getMessage());
         } else if (message.equals(ErrorEnum.USER_IS_DISABLED.getMessage())) {
             return R.error(ErrorEnum.USER_IS_DISABLED.getCode(), ErrorEnum.USER_IS_DISABLED.getMessage());
-        }else {
+        } else {
             return R.ok().put("token", message);
         }
     }
@@ -75,5 +70,31 @@ public class UserController {
     public R updateStatus(@PathVariable("uid") String uid) {
         userService.updateStatus(uid);
         return R.ok();
+    }
+
+    @PostMapping("/add")
+    public R addUser(@RequestBody UserAddVo userAddVo) {
+        try {
+            userService.addUser(userAddVo);
+            return R.ok();
+        } catch (Exception e) {
+            return R.error(ErrorEnum.FAILED_TO_ADD_USER.getCode(), ErrorEnum.FAILED_TO_ADD_USER.getMessage());
+        }
+    }
+
+    @GetMapping("/{uid}")
+    public R getUserInfo(@PathVariable("uid") String uid) {
+        UserEntity user = userService.getById(uid);
+        return R.ok().put("userInfo", user);
+    }
+
+    @PutMapping("/{uid}/update")
+    public R updateUser(@PathVariable("uid") String uid, @RequestBody UserAddVo userAddVo) {
+        try {
+            userService.updateUser(uid, userAddVo);
+            return R.ok();
+        } catch (Exception e) {
+            return R.error(ErrorEnum.FAILED_TO_UPDATE_USER.getCode(), ErrorEnum.FAILED_TO_UPDATE_USER.getMessage());
+        }
     }
 }
