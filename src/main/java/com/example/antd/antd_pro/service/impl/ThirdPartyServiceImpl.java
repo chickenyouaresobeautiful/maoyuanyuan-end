@@ -28,8 +28,12 @@ public class ThirdPartyServiceImpl implements ThirdPartyService {
         String fileName = file.getOriginalFilename();
         String prefix = fileName.substring(fileName.lastIndexOf("."));
         String newFileName = UUID.randomUUID().toString() + prefix;
-        String folder = "头像/";      //指定上传文件夹
-
+        String folder = "";
+        if (file.getName().equals("avatar")) {
+            folder = "头像/";
+        } else if (file.getName().equals("cover")) {
+            folder = "商品图片/";
+        }
         InputStream inputStream = file.getInputStream();
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, folder + newFileName, inputStream);
         putObjectRequest.setProcess("true");

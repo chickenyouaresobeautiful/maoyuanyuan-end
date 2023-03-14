@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.antd.antd_pro.mapper.OrderDetailsMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.antd.antd_pro.entity.OrderDetailsEntity">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="orderNo" column="order_no" jdbcType="VARCHAR"/>
+            <result property="goodsId" column="goods_id" jdbcType="BIGINT"/>
+            <result property="goodsTitle" column="goods_title" jdbcType="VARCHAR"/>
+            <result property="goodsCover" column="goods_cover" jdbcType="VARCHAR"/>
+            <result property="goodsPrice" column="goods_price" jdbcType="DECIMAL"/>
+            <result property="goodsNum" column="goods_num" jdbcType="INTEGER"/>
+            <result property="totalPrice" column="total_price" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_no,goods_id,
+        goods_title,goods_cover,goods_price,
+        goods_num,total_price
+    </sql>
+</mapper>

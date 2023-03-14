@@ -71,10 +71,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         redisTemplate.delete(TokenConstant.REDIS_TOKEN_PRE + username);
     }
 
-    @Override
-    public long iKunCount() {
-        return this.count();
-    }
 
     @Override
     public Page<UserEntity> getUserList(Map<String, Object> params) {

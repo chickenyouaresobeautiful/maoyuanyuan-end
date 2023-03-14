@@ -21,8 +21,18 @@ public class ThirdPartyController {
     @Autowired
     private ThirdPartyService thirdPartyService;
 
-    @PostMapping("/oss/upload")
-    public R uploadImg(@RequestParam("avatar") MultipartFile file) {
+    @PostMapping("/oss/uploadAvatar")
+    public R uploadAvatar(@RequestParam("avatar") MultipartFile file) {
+        try {
+            String url = thirdPartyService.uploadImage(file);
+            return R.ok().put("imageUrl", url);
+        } catch (IOException e) {
+            return R.error(ErrorEnum.IMAGE_UPLOAD_FAILED.getCode(), ErrorEnum.IMAGE_UPLOAD_FAILED.getMessage());
+        }
+    }
+
+    @PostMapping("/oss/uploadCover")
+    public R uploadCover(@RequestParam("cover") MultipartFile file) {
         try {
             String url = thirdPartyService.uploadImage(file);
             log.info(url);

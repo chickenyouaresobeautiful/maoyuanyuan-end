@@ -21,8 +21,6 @@ public interface UserService extends IService<UserEntity> {
 
     void outLogin(String username);
 
-    long iKunCount();
-
     Page<UserEntity> getUserList(Map<String, Object> params);
 
     void updateStatus(String uid);

@@ -62,7 +62,7 @@ public class UserController {
 
     @GetMapping("iKunCount")
     public R iKunCount() {
-        long count = userService.iKunCount();
+        long count = userService.count();
         return R.ok().put("count", count);
     }
 

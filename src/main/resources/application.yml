@@ -6,9 +6,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/antd_pro
     username: root
-    password: root
+    password: jiangdawei56632
   redis:
-    host: 8.130.33.99
+    host: 192.168.56.10
     port: 6379
   jackson:
     date-format: yyyy-MM-dd
