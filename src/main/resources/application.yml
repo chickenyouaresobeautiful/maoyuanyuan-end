@@ -14,7 +14,7 @@ spring:
     date-format: yyyy-MM-dd
 
 oss:
-  accessKeyId: LTAI5tFBhHHBU6D9B4RKcBze
-  accessKeySecret: 7n12l9Bycwj7aEleK12Qb1hzECaBG3
-  endpoint: oss-cn-hangzhou.aliyuncs.com
-  bucketName: edu-56632
+  accessKeyId: xxx
+  accessKeySecret: xxx
+  endpoint: xxx
+  bucketName: xxx
