@@ -1,24 +1,24 @@
 package com.example.antd.antd_pro.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.antd.antd_pro.entity.CategoryEntity;
 import com.example.antd.antd_pro.service.CategoryService;
 import com.example.antd.antd_pro.mapper.CategoryMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
-* @author David
-* @description 针对表【category(商品三级分类)】的数据库操作Service实现
-* @createDate 2023-03-12 16:42:25
-*/
+ * @author David
+ * @description 针对表【category(商品三级分类)】的数据库操作Service实现
+ * @createDate 2023-03-12 16:42:25
+ */
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEntity>
-    implements CategoryService{
+        implements CategoryService {
 
     @Override
     public List<CategoryEntity> listWithTree() {
@@ -47,6 +47,15 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
         return resultList;
     }
 
+    @Override
+    public void addCategory(CategoryEntity categoryEntity) {
+        categoryEntity.setCatLevel(1);
+        if (categoryEntity.getParentCid() == null) {
+            categoryEntity.setParentCid(0L);
+        }
+        this.save(categoryEntity);
+    }
+
     private List<Long> findParentPath(Long catalogId, List<Long> catIds) {
         catIds.add(catalogId);
         CategoryEntity categoryEntity = baseMapper.selectById(catalogId);
@@ -61,6 +70,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
         List<CategoryEntity> result = new ArrayList<>();
         for (CategoryEntity categoryEntity : categoryEntities) {
             if (categoryEntity.getParentCid().equals(menu.getCatId())) {
+                if (categoryEntity.getCatLevel() < 3) {
+                    categoryEntity.setChildren(getChildren(categoryEntity, categoryEntities));
+                }
                 result.add(categoryEntity);
             }
         }

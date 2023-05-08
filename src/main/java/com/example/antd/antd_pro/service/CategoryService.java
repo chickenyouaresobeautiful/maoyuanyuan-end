@@ -15,4 +15,6 @@ public interface CategoryService extends IService<CategoryEntity> {
     List<CategoryEntity> listWithTree();
 
     List<Long> getCatIdList(Long categoryId);
+
+    void addCategory(CategoryEntity categoryEntity);
 }
